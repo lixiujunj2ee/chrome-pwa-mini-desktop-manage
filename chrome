@@ -1,0 +1,19 @@
+##set google for default brower
+
+    #xdg-settings set default-web-browser com.google.Chrome.desktop
+    xdg-settings set default-web-browser google-chrome.desktop
+    xdg-settings get default-web-browser
+    xdg-mime default com.google.Chrome.desktop x-scheme-handler/http
+    xdg-mime default com.google.Chrome.desktop x-scheme-handler/https
+
+    flatpak override --user \
+    --filesystem=~/.local/share/applications:create \
+    --filesystem=~/.local/share/PWAs:create \
+    --filesystem=~/.local/share/icons:create \
+    com.google.Chrome
+    echo "grant filesystem success!"
+	
+    rm -rf ~/.local/share/applications/chrome-*.desktop
+    touch ~/.local/share/icons/hicolor
+    gtk-update-icon-cache -f -t ~/.local/share/icons/hicolor --ignore-theme-index
+    update-desktop-database ~/.local/share/applications
